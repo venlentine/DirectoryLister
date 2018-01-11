@@ -22,6 +22,7 @@
 
         <!-- META -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta charset="utf-8">
 
         <?php file_exists('analytics.inc') ? include('analytics.inc') : false; ?>
@@ -93,7 +94,6 @@
             </div>
 
             <ul id="directory-listing" class="nav nav-pills nav-stacked">
-
                 <?php foreach($dirArray as $name => $fileInfo): ?>
                     <li data-name="<?php echo $name; ?>" data-href="<?php echo $fileInfo['url_path']; ?>">
                         <a href="<?php echo $fileInfo['url_path']; ?>" class="clearfix" data-name="<?php echo $name; ?>">
