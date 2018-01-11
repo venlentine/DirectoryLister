@@ -24,22 +24,22 @@
     if (isset($_GET['torrent'])) {
 
         $torrent = new Torrent( $_GET['torrent'] );
-        //var_dump($torrent->info);die;
+        //var_dump($torrent->encoding());die;
         echo '<dl>',
              '<dt>private: </dt><dd>', $torrent->is_private() ? 'yes' : 'no', '</dd>',
-             '<dt>name: </dt><dd>', $torrent->name(), '</dd>',
-             '<dt>publisher: </dt><dd>', $torrent->publisher(), '</dd>',
+             '<dt>name: </dt><dd>', torrent_encoding($torrent->name(), $torrent->encoding()), '</dd>',
+             '<dt>publisher: </dt><dd>', torrent_encoding($torrent->publisher(), $torrent->encoding()), '</dd>',
              '<dt>date: </dt><dd>', date('Y-m-d H:i:s', $torrent->creation_date()), '</dd>',
              '<dt>announce: </dt><dd>', torrent_announce($torrent->announce()), '</dd>',
              '<dt>piece_length: </dt><dd>', Torrent::format($torrent->piece_length()), '</dd>',
              '<dt>size: </dt><dd>', $torrent->size( 2 ), '</dd>',
              '<dt>hash info: </dt><dd>', $torrent->hash_info(), '</dd>',
-             '<dt>comment: </dt><dd>', $torrent->comment(), '</dd>',
+             '<dt>comment: </dt><dd>', torrent_encoding($torrent->comment(), $torrent->encoding()), '</dd>',
              '</dl>';
              //'<br>announce: '; var_dump( $torrent->announce() );
              //'<br>stats: '; var_dump( $torrent->scrape() );
              //echo '<br>source: ', $torrent;
-        $files = torrent_files($torrent->name(), $torrent->content());
+        $files = torrent_files($torrent->name(), $torrent->content(), $torrent->encoding());
         echo '<ul>';
         foreach ($files as $key => $value) {
             echo '<li>', $value['name'], ' ', $value['size'], '</li>';
@@ -77,6 +77,18 @@
         }
 
     }
+
+    function torrent_encoding($content, $encoding = "UTF-8"){
+        if(empty($encoding)){
+            return $content;
+        }
+        if(strtoupper($encoding) == "UTF-8"){
+            return $content;
+        }else{
+            return iconv($encoding, "UTF-8", $content);
+        }
+    }
+
     function torrent_announce($content){
         if(is_array($content)){
             if(is_array($content[0])){
@@ -88,11 +100,12 @@
             return $content;
         }
     }
-    function torrent_files($name, $content){
+    function torrent_files($name, $content, $encoding = "UTF-8"){
         $arr = [];
         foreach ($content as $key => $value) {
             if(!stristr($key, 'BitComet')){
                 $key = str_replace($name, "", $key);
+                $key = torrent_encoding($key, $encoding);
                 $arr[] = ['name' => $key, 'size' => Torrent::format($value)];
             }
         }

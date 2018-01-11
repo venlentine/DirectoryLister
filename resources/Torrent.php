@@ -254,6 +254,12 @@ class Torrent {
 			null;
 	}
 
+	public function encoding () {
+		return isset( $this->encoding ) ?
+			$this->encoding :
+			null;
+	}
+
 	/** Compute hash info
 	 * @return string hash info or null if info not set
 	 */
