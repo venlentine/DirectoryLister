@@ -1,5 +1,11 @@
 Directory Lister - The simple PHP directory lister
 ==================================================
+20180111
+  * 修正pathinfo获取中文PATHINFO_BASENAME的问题
+  * 增加Torrent文件解析
+
+
+
 Created by, [Chris Kankiewicz](http://www.ChrisKankiewicz.com)
 
 

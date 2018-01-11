@@ -59,6 +59,7 @@ body.breadcrumb-fixed {
 }
 
 .file-info-button,
+.torrent-info-button,
 .web-link-button {
     display: inline-block;
     cursor: pointer;
@@ -69,6 +70,7 @@ body.breadcrumb-fixed {
 }
 
 .web-link-button i,
+.torrent-info-button i,
 .file-info-button i {
     color: #999;
 }
@@ -100,6 +102,11 @@ body.breadcrumb-fixed {
 #file-info .md5-hash,
 #file-info .sha1-hash {
     font-family: 'Cutive Mono', monospace, serif;
+}
+
+#torrent-info{
+    overflow-y: auto;
+    height: 500px;
 }
 
 
@@ -135,7 +142,9 @@ body.breadcrumb-fixed {
         max-width: 75%;
     }
 
-    .file-info-button {
+    .file-info-button,
+    .torrent-info-button
+    {
         display: none !important;
     }
 
