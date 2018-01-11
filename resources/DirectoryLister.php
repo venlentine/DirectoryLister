@@ -629,8 +629,8 @@ class DirectoryLister {
                             $urlPath = $this->containsIndex($relativePath) ? $relativePath : '?dir=' . $urlPath;
                         }
 
-			$basename = pathinfo($relativePath, PATHINFO_BASENAME);
-			$basename = ltrim(substr($relativePath, strrpos($relativePath, '/')),"/");//解决中文问题
+			         //$basename = pathinfo($relativePath, PATHINFO_BASENAME);
+			         $basename = ltrim(substr($relativePath, strrpos($relativePath, '/')),"/");//解决中文问题
                         // Add the info to the main array
                         $directoryArray[$basename] = array(
                             'file_path'  => $relativePath,

@@ -55,6 +55,36 @@ $(document).ready(function() {
 
     });
 
+    $('.torrent-info-button').click(function(event) {
+
+        // Get the file name and path
+        var name = $(this).closest('li').attr('data-name');
+        var path = $(this).closest('li').attr('data-href');
+
+        // Set modal title value
+        $('#torrent-info-modal .modal-title').text(name);
+
+        $('#torrent-info').html('Loading...');
+
+        $.ajax({
+            url:     '?torrent=' + path,
+            type:    'get',
+            dataType: 'html',
+            success: function(data) {
+                $('#torrent-info').empty();
+                $('#torrent-info').append(data);
+
+            }
+        });
+
+        // Show the modal
+        $('#torrent-info-modal').modal('show');
+
+        // Prevent default link action
+        event.preventDefault();
+
+    });
+
 });
 
 function showHideTopLink(elTop) {

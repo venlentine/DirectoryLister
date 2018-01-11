@@ -8,17 +8,17 @@
         <link rel="shortcut icon" href="<?php echo THEMEPATH; ?>/img/folder.png">
 
         <!-- STYLES -->
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="<?php echo THEMEPATH; ?>/css/style.css">
 
         <!-- SCRIPTS -->
-        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="<?php echo THEMEPATH; ?>/js/directorylister.js"></script>
 
         <!-- FONTS -->
-        <link rel="stylesheet" type="text/css"  href="//fonts.googleapis.com/css?family=Cutive+Mono">
+        <link rel="stylesheet" type="text/css"  href="//fonts.lug.ustc.edu.cn/css?family=Cutive+Mono">
 
         <!-- META -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -117,8 +117,10 @@
                         </a>
 
                         <?php if (is_file($fileInfo['file_path'])): ?>
-
-                            <a href="javascript:void(0)" class="file-info-button">
+                            <?php
+                                $ext = pathinfo($fileInfo['file_path'], PATHINFO_EXTENSION);
+                            ?>
+                            <a href="javascript:void(0)" class="<?=($ext=='torrent') ? 'torrent-info-button' : 'file-info-button'?>">
                                 <i class="fa fa-info-circle"></i>
                             </a>
 
@@ -158,6 +160,25 @@
 
                             </tbody>
                         </table>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div id="torrent-info-modal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">{{modal_header}}</h4>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <div id="torrent-info"></div>
 
                     </div>
 
